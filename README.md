@@ -1,134 +1,106 @@
-# News API
+# 📰 News API
 
-API de notícias desenvolvida com FastAPI e Supabase.
+<div align="center">
+  
+  *A lightweight news API built with FastAPI and Supabase*
+  
+  [![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=flat&logo=fastapi)](https://fastapi.tiangolo.com)
+  [![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=flat&logo=supabase&logoColor=white)](https://supabase.com)
+  [![Render](https://img.shields.io/badge/Render-46E3B7?style=flat&logo=render&logoColor=white)](https://render.com)
+  
+</div>
 
-## 🚀 Como rodar o projeto localmente
+## 🚀 Local Development
 
-1. Instale as dependências:
 ```bash
+# Install dependencies
 pip install -r requirements.txt
-```
 
-2. Inicie o servidor:
-```bash
+# Run the server
 uvicorn main:app --reload --port 8000
 ```
 
-A API estará disponível em `http://localhost:8000`
+Your API will be available at `http://localhost:8000`
 
-## 🌐 Como hospedar no Render
+---
 
-### Pré-requisitos
-- Conta no [Render](https://render.com) (gratuita)
-- Conta no [Supabase](https://supabase.com) com projeto criado
-- Repositório Git (GitHub, GitLab ou Bitbucket)
+## ☁️ Deploy on Render
 
-### Passo a Passo
+### Prerequisites
+- [Render](https://render.com) account (free tier available)
+- [Supabase](https://supabase.com) project
+- Git repository (GitHub/GitLab/Bitbucket)
 
-#### 1. Preparar o repositório
+### Quick Deploy
 
-Certifique-se de que seu repositório contém os seguintes arquivos:
-- `main.py` (código da aplicação)
-- `requirements.txt` (dependências)
-- Arquivo `.env` **não deve estar no repositório** (use apenas localmente)
+<details>
+<summary><b>📦 1. Repository Setup</b></summary>
 
-#### 2. Criar Web Service no Render
+Ensure your repo includes:
+- `main.py`
+- `requirements.txt`
+- No `.env` file (use environment variables instead)
+</details>
 
-1. Acesse [https://dashboard.render.com](https://dashboard.render.com)
-2. Clique em **"New +"** e selecione **"Web Service"**
-3. Conecte seu repositório Git (autorize o acesso se necessário)
-4. Selecione o repositório do projeto `news`
+<details>
+<summary><b>⚙️ 2. Create Web Service</b></summary>
 
-#### 3. Configurar o Web Service
+1. Go to [dashboard.render.com](https://dashboard.render.com)
+2. Click **"New +"** → **"Web Service"**
+3. Connect your repository
 
-Preencha as seguintes informações:
-
-- **Name**: `news-api` (ou nome de sua preferência)
-- **Region**: Escolha a região mais próxima (ex: `Oregon (US West)`)
-- **Branch**: `main` (ou sua branch principal)
+**Configuration:**
+- **Name**: `news-api` (or your choice)
 - **Runtime**: `Python 3`
-- **Build Command**: 
-  ```
-  pip install -r requirements.txt
-  ```
-- **Start Command**: 
-  ```
-  uvicorn main:app --host 0.0.0.0 --port $PORT
-  ```
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+</details>
 
-#### 4. Configurar Variáveis de Ambiente
+<details>
+<summary><b>🔐 3. Environment Variables</b></summary>
 
-Na seção **Environment Variables**, adicione as seguintes variáveis:
+Add these from your [Supabase settings](https://app.supabase.com/project/_/settings/api):
 
-| Key | Value |
-|-----|-------|
-| `SUPABASE_URL` | Sua URL do Supabase (ex: `https://xxx.supabase.co`) |
-| `SUPABASE_ANON_KEY` | Sua chave anônima do Supabase |
-| `TABLE_NEWS` | `news` (nome da tabela) |
+| Variable | Description |
+|----------|-------------|
+| `SUPABASE_URL` | Your project URL |
+| `SUPABASE_ANON_KEY` | Your anon/public key |
+| `TABLE_NEWS` | `news` (table name) |
 
-**Como obter as credenciais do Supabase:**
-1. Acesse seu projeto no [Supabase](https://app.supabase.com)
-2. Vá em **Settings** → **API**
-3. Copie a **URL** e a **anon/public key**
+</details>
 
-#### 5. Selecionar o Plano
+<details>
+<summary><b>🚀 4. Deploy</b></summary>
 
-- Escolha o plano **Free** para começar
-- Clique em **"Create Web Service"**
+- Select **Free** plan
+- Click **"Create Web Service"**
+- Wait 2-3 minutes for first deployment
+- Access your API at: `https://news-api.onrender.com`
+- Interactive docs at: `https://news-api.onrender.com/docs`
+</details>
 
-#### 6. Aguardar o Deploy
+---
 
-- O Render irá automaticamente:
-  1. Clonar seu repositório
-  2. Instalar as dependências
-  3. Iniciar a aplicação
-- Acompanhe os logs em tempo real
-- O primeiro deploy pode levar alguns minutos
+## ⚡ Free Tier Notes
 
-#### 7. Acessar sua API
+- 💤 App sleeps after **15 minutes** of inactivity
+- ⏰ First request may take **~30 seconds** (cold start)
+- ⏱️ Includes **750 hours/month** of runtime
 
-Após o deploy bem-sucedido:
-- Sua API estará disponível em: `https://news-api.onrender.com` (substitua pelo nome que você escolheu)
-- Acesse a documentação interativa em: `https://news-api.onrender.com/docs`
+---
 
-### ⚙️ Configurações Adicionais
+## 🔧 Troubleshooting
 
-#### Auto-Deploy
-Por padrão, o Render faz deploy automático quando você faz push para a branch configurada. Para desabilitar:
-1. Vá em **Settings** do seu Web Service
-2. Desative **"Auto-Deploy"**
+| Issue | Solution |
+|-------|----------|
+| App fails to start | Check start command includes `$PORT` |
+| Missing env vars | Verify `SUPABASE_URL` and `SUPABASE_ANON_KEY` are set |
+| Auto-deploy not working | Check branch settings in Render dashboard |
 
-#### Domínio Personalizado
-1. Vá em **Settings** → **Custom Domain**
-2. Adicione seu domínio
-3. Configure os registros DNS conforme as instruções
+---
 
-#### Monitoramento
-- Acesse a aba **"Logs"** para ver logs em tempo real
-- Acesse a aba **"Metrics"** para ver uso de CPU e memória
-
-### 🔧 Solução de Problemas
-
-#### Erro: "Application failed to start"
-- Verifique se o comando de start está correto: `uvicorn main:app --host 0.0.0.0 --port $PORT`
-- Confirme que todas as variáveis de ambiente estão configuradas
-
-#### Erro: "RuntimeError: Configure SUPABASE_URL e SUPABASE_ANON_KEY"
-- Verifique se as variáveis de ambiente `SUPABASE_URL` e `SUPABASE_ANON_KEY` estão configuradas corretamente no Render
-
-#### Aplicação fica "suspensa" no plano gratuito
-- O plano gratuito do Render suspende a aplicação após 15 minutos de inatividade
-- A primeira requisição após a suspensão pode levar ~30 segundos para "acordar" o serviço
-
-### 📝 Notas Importantes
-
-- O plano gratuito do Render tem **750 horas/mês** de uso
-- A aplicação pode ficar lenta após períodos de inatividade (cold start)
-- Para produção, considere usar um plano pago para melhor performance
-
-### 🔄 Atualizações
-
-Para atualizar sua aplicação:
-1. Faça commit e push das alterações no repositório
-2. O Render detectará automaticamente e iniciará um novo deploy
-3. Acompanhe o progresso na aba **"Events"**
+<div align="center">
+  
+  ***Live Demo**: `https://news-api.onrender.com` (probably not working at the moment you saw this)
+  
+</div>
